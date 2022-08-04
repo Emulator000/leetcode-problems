@@ -13,6 +13,7 @@
 #include "1710-MaximumUnitsOnATruck.h"
 #include "2055-PlatesBetweenCandles.h"
 #include "2272-SubstringWithLargestVariance.h"
+#include "20-ValidParentheses.h"
 
 using namespace std;
 
@@ -405,6 +406,52 @@ void testSubstringWithLargestVariance() {
     cout << endl;
 }
 
+void testValidParentheses() {
+    cout << "Testing \"testSubstringWithLargestVariance\"..." << endl;
+
+    list<string> inputs = {
+            "()",
+            "[()]",
+            "()[]{}",
+            "(]",
+    };
+
+    list<bool> outputs = {
+            true,
+            true,
+            true,
+            false,
+    };
+
+    for (pair<list<string>::iterator, list<bool>::iterator> it(inputs.begin(), outputs.begin());
+         it.first != inputs.end();
+         ++it.first, ++it.second) {
+        auto start = std::chrono::high_resolution_clock::now();
+
+        int res = ValidParentheses::isValid(*it.first);
+
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+
+        if (res == *it.second) {
+            cout << "\033[32m";
+            cout << "Test PASSED for \"" << *it.first << "\", answer is " << res << endl;
+            cout << "\033[0m";
+        } else {
+            cout << "\033[31m";
+            cout << "Test NOT PASSED for \"" << *it.first << "\", answer is " << *it.second << " instead of " << res
+                 << endl;
+            cout << "\033[0m";
+        }
+
+        cout << "\033[36m";
+        cout << "Executed in: " << duration.count() << "ms" << endl;
+        cout << "\033[0m";
+    }
+
+    cout << endl;
+}
+
 int main() {
     testMaximumSubarray();
     testClimbStairs();
@@ -412,6 +459,7 @@ int main() {
     testMaximumUnitsOnATruck();
     testPlatesBetweenCandles();
     testSubstringWithLargestVariance();
+    testValidParentheses();
 
     return exit_status().e_termination;
 }
