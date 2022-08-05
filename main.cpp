@@ -16,6 +16,7 @@
 #include "20-ValidParentheses.h"
 #include "1041-RobotBoundedInCircle.h"
 #include "3-LongestSubstringWithoutRepeatingCharacters.h"
+#include "300-LongestIncreasingSubsequence.h"
 
 using namespace std;
 
@@ -544,6 +545,55 @@ void testLongestSubstringWithoutRepeatingCharacters() {
     cout << endl;
 }
 
+void testLongestIncreasingSubsequence() {
+    cout << "Testing \"testLongestIncreasingSubsequence\"..." << endl;
+
+    list<vector<int>> inputs = {
+            {0, 1, 0, 3, 2, 3},
+            {6, 2, 5, 1, 7, 4, 8, 3},
+            {10, 9, 2, 5, 3, 7, 101, 18},
+            {7, 7, 7, 7, 7, 7, 7},
+    };
+
+    list<int> outputs = {
+            4,
+            4,
+            4,
+            1,
+    };
+
+    for (pair<list<vector<int>>::iterator, list<int>::iterator> it(inputs.begin(), outputs.begin());
+         it.first != inputs.end();
+         ++it.first, ++it.second) {
+        auto start = std::chrono::high_resolution_clock::now();
+
+        int res = LongestIncreasingSubsequence::lengthOfLIS(*it.first);
+
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+
+        stringstream result;
+        copy((*it.first).begin(), (*it.first).end(), std::ostream_iterator<int>(result, ", "));
+
+        if (res == *it.second) {
+            cout << "\033[32m";
+            cout << "Test PASSED for \"" << result.str() << "\", answer is " << res << endl;
+            cout << "\033[0m";
+        } else {
+            cout << "\033[31m";
+            cout << "Test NOT PASSED for \"" << result.str() << "\", answer is " << *it.second << " instead of " << res
+                 << endl;
+            cout << "\033[0m";
+        }
+
+        cout << "\033[36m";
+        cout << "Executed in: " << duration.count() << "ms" << endl;
+        cout << "\033[0m";
+    }
+
+    cout << endl;
+}
+
 int main() {
     testMaximumSubarray();
     testClimbStairs();
@@ -554,6 +604,7 @@ int main() {
     testValidParentheses();
     testRobotBoundedInCircle();
     testLongestSubstringWithoutRepeatingCharacters();
+    testLongestIncreasingSubsequence();
 
     return exit_status().e_termination;
 }
