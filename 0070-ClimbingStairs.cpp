@@ -1,4 +1,4 @@
-#include "70-ClimbingStairs.h"
+#include "0070-ClimbingStairs.h"
 
 int ClimbStairs::climbStairs(int n) {
     int oneStep = 1, twoStep = 1;

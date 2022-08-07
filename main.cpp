@@ -7,16 +7,17 @@
 #include <utmp.h>
 #include <iterator>
 
-#include "53-MaximumSubarray.h"
-#include "70-ClimbingStairs.h"
-#include "907-SumOfSubarrayMinimums.h"
+#include "0053-MaximumSubarray.h"
+#include "0070-ClimbingStairs.h"
+#include "0907-SumOfSubarrayMinimums.h"
 #include "1710-MaximumUnitsOnATruck.h"
 #include "2055-PlatesBetweenCandles.h"
 #include "2272-SubstringWithLargestVariance.h"
-#include "20-ValidParentheses.h"
+#include "0020-ValidParentheses.h"
 #include "1041-RobotBoundedInCircle.h"
-#include "3-LongestSubstringWithoutRepeatingCharacters.h"
-#include "300-LongestIncreasingSubsequence.h"
+#include "0003-LongestSubstringWithoutRepeatingCharacters.h"
+#include "0300-LongestIncreasingSubsequence.h"
+#include "00001-TwoSum.h"
 
 using namespace std;
 
@@ -42,7 +43,7 @@ void testMaximumSubarray() {
          ++it.first, ++it.second) {
         auto start = std::chrono::high_resolution_clock::now();
 
-        int res = MaximumSubarray::maximumSubarrayProblem(*it.first);
+        auto res = MaximumSubarray::maximumSubarrayProblem(*it.first);
 
         auto stop = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
@@ -200,7 +201,7 @@ void testSumOfSubarrayMinimums() {
          ++it.first, ++it.second) {
         auto start = std::chrono::high_resolution_clock::now();
 
-        int res = SumOfSubarrayMinimums::sumSubarrayMins(*it.first);
+        auto res = SumOfSubarrayMinimums::sumSubarrayMins(*it.first);
 
         auto stop = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
@@ -304,7 +305,7 @@ void testPlatesBetweenCandles() {
          ++it.first, ++it.second) {
         auto start = std::chrono::high_resolution_clock::now();
 
-        vector<int> res = PlatesBetweenCandles::platesBetweenCandles(it.first->first, it.first->second);
+        auto res = PlatesBetweenCandles::platesBetweenCandles(it.first->first, it.first->second);
 
         auto stop = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
@@ -385,7 +386,7 @@ void testSubstringWithLargestVariance() {
          ++it.first, ++it.second) {
         auto start = std::chrono::high_resolution_clock::now();
 
-        int res = SubstringWithLargestVariance::largestVariance(*it.first);
+        auto res = SubstringWithLargestVariance::largestVariance(*it.first);
 
         auto stop = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
@@ -431,7 +432,7 @@ void testValidParentheses() {
          ++it.first, ++it.second) {
         auto start = std::chrono::high_resolution_clock::now();
 
-        int res = ValidParentheses::isValid(*it.first);
+        auto res = ValidParentheses::isValid(*it.first);
 
         auto stop = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
@@ -477,7 +478,7 @@ void testRobotBoundedInCircle() {
          ++it.first, ++it.second) {
         auto start = std::chrono::high_resolution_clock::now();
 
-        int res = RobotBoundedInCircle::isRobotBounded(*it.first);
+        auto res = RobotBoundedInCircle::isRobotBounded(*it.first);
 
         auto stop = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
@@ -521,7 +522,7 @@ void testLongestSubstringWithoutRepeatingCharacters() {
          ++it.first, ++it.second) {
         auto start = std::chrono::high_resolution_clock::now();
 
-        int res = LongestSubstringWithoutRepeatingCharacters::lengthOfLongestSubstring(*it.first);
+        auto res = LongestSubstringWithoutRepeatingCharacters::lengthOfLongestSubstring(*it.first);
 
         auto stop = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
@@ -549,10 +550,10 @@ void testLongestIncreasingSubsequence() {
     cout << "Testing \"testLongestIncreasingSubsequence\"..." << endl;
 
     list<vector<int>> inputs = {
-            {0, 1, 0, 3, 2, 3},
-            {6, 2, 5, 1, 7, 4, 8, 3},
+            {0,  1, 0, 3, 2, 3},
+            {6,  2, 5, 1, 7, 4, 8,   3},
             {10, 9, 2, 5, 3, 7, 101, 18},
-            {7, 7, 7, 7, 7, 7, 7},
+            {7,  7, 7, 7, 7, 7, 7},
     };
 
     list<int> outputs = {
@@ -567,7 +568,7 @@ void testLongestIncreasingSubsequence() {
          ++it.first, ++it.second) {
         auto start = std::chrono::high_resolution_clock::now();
 
-        int res = LongestIncreasingSubsequence::lengthOfLIS(*it.first);
+        auto res = LongestIncreasingSubsequence::lengthOfLIS(*it.first);
 
         auto stop = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
@@ -594,6 +595,60 @@ void testLongestIncreasingSubsequence() {
     cout << endl;
 }
 
+void testTwoSum() {
+    cout << "Testing \"testTwoSum\"..." << endl;
+
+    list<pair<vector<int>, int>> inputs = {
+            {{2, 7, 11, 15}, 9},
+            {{3, 2, 4},      6},
+            {{3, 3},         6},
+    };
+
+    list<vector<int>> outputs = {
+            {0, 1},
+            {1, 2},
+            {0, 1},
+    };
+
+    for (pair<list<pair<vector<int>, int>>::iterator, list<vector<int>>::iterator> it(inputs.begin(), outputs.begin());
+         it.first != inputs.end();
+         ++it.first, ++it.second) {
+        auto start = std::chrono::high_resolution_clock::now();
+
+        auto res = TwoSum::twoSum(it.first->first, it.first->second);
+
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+
+        stringstream result;
+        copy(it.first->first.begin(), it.first->first.end(), std::ostream_iterator<int>(result, ", "));
+
+        stringstream outputResult;
+        copy(res.begin(), res.end(), std::ostream_iterator<int>(outputResult, ", "));
+
+        stringstream realResult;
+        copy((*it.second).begin(), (*it.second).end(), std::ostream_iterator<int>(realResult, ", "));
+
+        if (res == *it.second) {
+            cout << "\033[32m";
+            cout << "Test PASSED for \"" << result.str() << "\", answer is " << outputResult.str() << endl;
+            cout << "\033[0m";
+        } else {
+            cout << "\033[31m";
+            cout << "Test NOT PASSED for \"" << result.str() << "\", answer is " << realResult.str() << " instead of "
+                 << outputResult.str()
+                 << endl;
+            cout << "\033[0m";
+        }
+
+        cout << "\033[36m";
+        cout << "Executed in: " << duration.count() << "ms" << endl;
+        cout << "\033[0m";
+    }
+
+    cout << endl;
+}
+
 int main() {
     testMaximumSubarray();
     testClimbStairs();
@@ -605,6 +660,7 @@ int main() {
     testRobotBoundedInCircle();
     testLongestSubstringWithoutRepeatingCharacters();
     testLongestIncreasingSubsequence();
+    testTwoSum();
 
     return exit_status().e_termination;
 }
