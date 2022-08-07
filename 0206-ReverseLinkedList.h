@@ -10,6 +10,7 @@ struct ListNode {
 class ReverseLinkedList {
 public:
     static ListNode* reverseList(ListNode* head);
+    static ListNode* reverseListPlain(ListNode* head);
 };
 
 

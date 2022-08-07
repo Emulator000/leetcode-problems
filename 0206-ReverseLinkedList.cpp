@@ -5,16 +5,12 @@
 using namespace std;
 
 ListNode *ReverseLinkedList::reverseList(ListNode *head) {
-    if (head == nullptr) {
-        return nullptr;
-    }
-
-    if (head->next == nullptr) {
+    if (head == nullptr || head->next == nullptr) {
         return head;
     }
 
     auto cursor = head;
-    stack<ListNode*> reverse;
+    stack<ListNode *> reverse;
 
     while (cursor != nullptr) {
         reverse.push(cursor);
@@ -33,4 +29,17 @@ ListNode *ReverseLinkedList::reverseList(ListNode *head) {
     }
 
     return head;
+}
+
+ListNode *ReverseLinkedList::reverseListPlain(ListNode *head) {
+    ListNode *next = head, *prev = nullptr;
+
+    while (next != nullptr) {
+        next = head->next;
+        head->next = prev;
+        prev = head;
+        head = next;
+    }
+
+    return prev;
 }
