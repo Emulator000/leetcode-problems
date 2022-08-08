@@ -7,7 +7,7 @@
 string ReverseWordsInAString::reverseWords(string s) {
     std::reverse(s.begin(), s.end());
 
-    size_t pos = 0;
+    size_t pos;
     string result;
 
     while ((pos = s.find(' ')) != string::npos) {
@@ -82,21 +82,25 @@ string ReverseWordsInAString::reverseWordsVector(string s) {
 }
 
 string ReverseWordsInAString::reverseWordsStack(string s) {
-    size_t pos;
+    size_t pos, start = 0;
     stack<string> strings;
 
-    while ((pos = s.find(' ')) != string::npos) {
-        auto newS = s.substr(0, pos);
-
-        if (!newS.empty()) {
-            strings.push(newS);
+    while ((pos = s.substr(start, -1).find(' ')) != string::npos) {
+        if (s.substr(start, 1) != " ") {
+            strings.push(s.substr(start, pos));
         }
 
-        s.erase(0, pos + 1);
+        start += (long) pos + 1;
     }
 
     if (!s.empty()) {
-        strings.push(s);
+        if (s.substr(start, 1) == " ") {
+            start++;
+        }
+
+        if (!s.substr(start, -1).empty()) {
+            strings.push(s.substr(start, -1));
+        }
     }
 
     string result;
