@@ -18,6 +18,10 @@
 #include "0003-LongestSubstringWithoutRepeatingCharacters.h"
 #include "0300-LongestIncreasingSubsequence.h"
 #include "00001-TwoSum.h"
+#include "0140-WordBreakII.h"
+#include "0127-WordLadder.h"
+#include "1584-MinCostToConnectAllPoints.h"
+#include "2360-LongestCycleInAGraph.h"
 
 using namespace std;
 
@@ -649,6 +653,198 @@ void testTwoSum() {
     cout << endl;
 }
 
+void testWordBreakII() {
+    cout << "Testing \"testWordBreakII\"..." << endl;
+
+    list<pair<string, vector<string>>> inputs = {
+            {"catsanddog",        {"cat",   "cats", "and",      "sand", "dog"}},
+            {"pineapplepenapple", {"apple", "pen",  "applepen", "pine", "pineapple"}},
+            {"catsandog",         {"cats",  "dog",  "sand",     "and",  "cat"}},
+    };
+
+    list<vector<string>> outputs = {
+            {"cats and dog",         "cat sand dog"},
+            {"pine apple pen apple", "pineapple pen apple", "pine applepen apple"},
+            {},
+    };
+
+    for (pair<list<pair<string, vector<string>>>::iterator, list<vector<string>>::iterator> it(inputs.begin(),
+                                                                                               outputs.begin());
+         it.first != inputs.end();
+         ++it.first, ++it.second) {
+        auto start = std::chrono::high_resolution_clock::now();
+
+        auto res = WordBreakII::wordBreak(it.first->first, it.first->second);
+
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+
+        stringstream outputResult;
+        copy(res.begin(), res.end(), std::ostream_iterator<string>(outputResult, ", "));
+
+        stringstream realResult;
+        copy((*it.second).begin(), (*it.second).end(), std::ostream_iterator<string>(realResult, ", "));
+
+        std::sort((*it.second).begin(), (*it.second).end());
+        std::sort(res.begin(), res.end());
+
+        if (res == *it.second) {
+            cout << "\033[32m";
+            cout << "Test PASSED for \"" << it.first->first << "\", answer is " << outputResult.str() << endl;
+            cout << "\033[0m";
+        } else {
+            cout << "\033[31m";
+            cout << "Test NOT PASSED for \"" << it.first->first << "\", answer is " << realResult.str()
+                 << " instead of "
+                 << outputResult.str()
+                 << endl;
+            cout << "\033[0m";
+        }
+
+        cout << "\033[36m";
+        cout << "Executed in: " << duration.count() << "ms" << endl;
+        cout << "\033[0m";
+    }
+
+    cout << endl;
+}
+
+void testWordLadder() {
+    cout << "Testing \"testWordLadder\"..." << endl;
+
+    list<pair<pair<string, string>, vector<string>>> inputs = {
+            {{"hit", "cog"}, {"hot", "dot", "dog", "lot", "log", "cog"}},
+            {{"hit", "cog"}, {"hot", "dot", "dog", "lot", "log"}},
+    };
+
+    list<int> outputs = {
+            5,
+            0,
+    };
+
+    for (pair<list<pair<pair<string, string>, vector<string>>>::iterator, list<int>::iterator> it(inputs.begin(),
+                                                                                                  outputs.begin());
+         it.first != inputs.end();
+         ++it.first, ++it.second) {
+        auto start = std::chrono::high_resolution_clock::now();
+
+        auto res = WordLadder::ladderLength(it.first->first.first, it.first->first.second, it.first->second);
+
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+
+        if (res == *it.second) {
+            cout << "\033[32m";
+            cout << "Test PASSED for \"" << it.first->first.first << "\" and \"" << it.first->first.second
+                 << "\", answer is " << res << endl;
+            cout << "\033[0m";
+        } else {
+            cout << "\033[31m";
+            cout << "Test NOT PASSED for \"" << it.first->first.first << "\" and \"" << it.first->first.second
+                 << "\", answer is " << *it.second
+                 << " instead of "
+                 << res
+                 << endl;
+            cout << "\033[0m";
+        }
+
+        cout << "\033[36m";
+        cout << "Executed in: " << duration.count() << "ms" << endl;
+        cout << "\033[0m";
+    }
+
+    cout << endl;
+}
+
+void testMinCostToConnectAllPoints() {
+    cout << "Testing \"testMinCostToConnectAllPoints\"..." << endl;
+
+    list<vector<vector<int>>> inputs = {
+            {{0, 0},  {2,  2}, {3,  10}, {5, 2}, {7, 0}},
+            {{3, 12}, {-2, 5}, {-4, 1}},
+    };
+
+    list<int> outputs = {
+            20,
+            18,
+    };
+
+    for (pair<list<vector<vector<int>>>::iterator, list<int>::iterator> it(inputs.begin(),
+                                                                           outputs.begin());
+         it.first != inputs.end();
+         ++it.first, ++it.second) {
+        auto start = std::chrono::high_resolution_clock::now();
+
+        auto res = MinCostToConnectAllPoints::minCostConnectPoints(*it.first);
+
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+
+        if (res == *it.second) {
+            cout << "\033[32m";
+            cout << "Test PASSED, answer is " << res << endl;
+            cout << "\033[0m";
+        } else {
+            cout << "\033[31m";
+            cout << "Test NOT PASSED, answer is " << *it.second << " instead of " << res << endl;
+            cout << "\033[0m";
+        }
+
+        cout << "\033[36m";
+        cout << "Executed in: " << duration.count() << "ms" << endl;
+        cout << "\033[0m";
+    }
+
+    cout << endl;
+}
+
+void testLongestCycleInAGraph() {
+    cout << "Testing \"testLongestCycleInAGraph\"..." << endl;
+
+    list<vector<int>> inputs = {
+            {3, 3,  4, 2, 3},
+            {2, -1, 3, 1},
+    };
+
+    list<int> outputs = {
+            3,
+            -1,
+    };
+
+    for (pair<list<vector<int>>::iterator, list<int>::iterator> it(inputs.begin(),
+                                                                   outputs.begin());
+         it.first != inputs.end();
+         ++it.first, ++it.second) {
+        auto start = std::chrono::high_resolution_clock::now();
+
+        auto res = LongestCycleInAGraph::longestCycle(*it.first);
+
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+
+        stringstream inputResult;
+        copy((*it.first).begin(), (*it.first).end(), std::ostream_iterator<int>(inputResult, ", "));
+
+        if (res == *it.second) {
+            cout << "\033[32m";
+            cout << "Test PASSED for " << inputResult.str() << ", answer is " << res << endl;
+            cout << "\033[0m";
+        } else {
+            cout << "\033[31m";
+            cout << "Test NOT PASSED for " << inputResult.str() << ", answer is " << *it.second << " instead of "
+                 << res
+                 << endl;
+            cout << "\033[0m";
+        }
+
+        cout << "\033[36m";
+        cout << "Executed in: " << duration.count() << "ms" << endl;
+        cout << "\033[0m";
+    }
+
+    cout << endl;
+}
+
 int main() {
     testMaximumSubarray();
     testClimbStairs();
@@ -661,6 +857,10 @@ int main() {
     testLongestSubstringWithoutRepeatingCharacters();
     testLongestIncreasingSubsequence();
     testTwoSum();
+    testWordBreakII();
+    testWordLadder();
+    testMinCostToConnectAllPoints();
+    testLongestCycleInAGraph();
 
     return exit_status().e_termination;
 }
