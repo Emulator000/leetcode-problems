@@ -4,7 +4,9 @@
 #include <unordered_set>
 
 // Educative version for this exercise
-int LongestSubstringWithAtMostKDistinctCharacters::longestSubstringWithAtMostKDistinctCharactersCanonicalApproach(string s, int k) {
+int
+LongestSubstringWithAtMostKDistinctCharacters::longestSubstringWithAtMostKDistinctCharactersCanonicalApproach(string s,
+                                                                                                              int k) {
     int windowStart = 0, maxLength = 0;
     unordered_map<char, int> charFrequencyMap;
 
