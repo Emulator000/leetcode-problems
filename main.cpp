@@ -22,6 +22,7 @@
 #include "0127-WordLadder.h"
 #include "1584-MinCostToConnectAllPoints.h"
 #include "2360-LongestCycleInAGraph.h"
+#include "????-LongestSubstringWithAtMostKDistinctCharacters.h"
 
 using namespace std;
 
@@ -845,6 +846,80 @@ void testLongestCycleInAGraph() {
     cout << endl;
 }
 
+void testLongestSubstringWithAtMostKDistinctCharacters() {
+    cout << "Testing \"testLongestSubstringWithAtMostKDistinctCharacters\"..." << endl;
+
+    list<pair<string, int>> inputs = {
+            {"araaci", 2},
+            {"araaci", 1},
+            {"cbbebi", 3},
+            {"cbbebi", 10},
+            {"dsfdsfsfdffffdffffsdfsdfdssdffdsfsdsfdfsdfokr342kiorew0fk09wefk43rk43kr943k043krfk430k5fdkfkkfffffdsfsdfk439r4309kr43krt0kef0kdsifksdfolsdkfldsfdsfkdsfdsdfssfffffffffee", 12},
+    };
+
+    list<int> outputs = {
+            4,
+            2,
+            5,
+            6,
+            68,
+    };
+
+    for (pair<list<pair<string, int>>::iterator, list<int>::iterator> it(inputs.begin(), outputs.begin());
+         it.first != inputs.end();
+         ++it.first, ++it.second) {
+        cout << "Testing using personal approach..." << endl;
+
+        auto start = std::chrono::high_resolution_clock::now();
+
+        auto res = LongestSubstringWithAtMostKDistinctCharacters::longestSubstringWithAtMostKDistinctCharacters((*it.first).first, (*it.first).second);
+
+        auto stop = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+
+        if (res == *it.second) {
+            cout << "\033[32m";
+            cout << "Test PASSED for \"" << (*it.first).first << "\", answer is " << res << endl;
+            cout << "\033[0m";
+        } else {
+            cout << "\033[31m";
+            cout << "Test NOT PASSED for \"" << (*it.first).first << "\", answer is " << *it.second << " instead of " << res
+                 << endl;
+            cout << "\033[0m";
+        }
+
+        cout << "\033[36m";
+        cout << "Executed in: " << duration.count() << "ms" << endl;
+        cout << "\033[0m";
+
+        cout << "Testing using canonical approach..." << endl;
+
+        start = std::chrono::high_resolution_clock::now();
+
+        res = LongestSubstringWithAtMostKDistinctCharacters::longestSubstringWithAtMostKDistinctCharactersCanonicalApproach((*it.first).first, (*it.first).second);
+
+        stop = std::chrono::high_resolution_clock::now();
+        duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+
+        if (res == *it.second) {
+            cout << "\033[32m";
+            cout << "Test PASSED for \"" << (*it.first).first << "\", answer is " << res << endl;
+            cout << "\033[0m";
+        } else {
+            cout << "\033[31m";
+            cout << "Test NOT PASSED for \"" << (*it.first).first << "\", answer is " << *it.second << " instead of " << res
+                 << endl;
+            cout << "\033[0m";
+        }
+
+        cout << "\033[36m";
+        cout << "Executed in: " << duration.count() << "ms" << endl;
+        cout << "\033[0m";
+    }
+
+    cout << endl;
+}
+
 int main() {
     testMaximumSubarray();
     testClimbStairs();
@@ -861,6 +936,7 @@ int main() {
     testWordLadder();
     testMinCostToConnectAllPoints();
     testLongestCycleInAGraph();
+    testLongestSubstringWithAtMostKDistinctCharacters();
 
     return exit_status().e_termination;
 }
