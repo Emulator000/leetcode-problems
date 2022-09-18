@@ -33,18 +33,17 @@ int LongestSubstringWithAtMostKDistinctCharacters::longestSubstringWithAtMostKDi
     int maxLength = 0, windowStart = 0;
     unordered_set<char> found;
 
-    for (int windowEnd = 0; windowEnd < s.size();) {
+    for (int windowEnd = 0; windowEnd < s.size(); windowEnd++) {
         found.insert(s[windowEnd]);
 
         if (found.size() > k) {
+            found.erase(s[windowStart]);
+
             windowStart++;
             windowEnd = windowStart;
-
-            found.clear();
-        } else {
-            maxLength = max(windowEnd - windowStart + 1, maxLength);
-            windowEnd++;
         }
+
+        maxLength = max(windowEnd - windowStart + 1, maxLength);
     }
 
     return maxLength;
